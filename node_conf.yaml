@@ -1,0 +1,88 @@
+# Defines which nodes are used in the system and how to connect to them.
+# This element should only be referenced during the constructor's initial
+# setup.
+# All names must be unique.
+# No other nodes are known.
+# These names will be used for src and dest addresses for the Message
+# The local node’s name is included in this list
+configuration :
+ - name : A
+   ip : 54.215.240.209
+   port : 11880
+ - name : B
+   ip : 54.215.224.6
+   port : 11881
+ - name : C
+   ip : 54.215.224.6
+   port : 11882
+ - name : D
+   ip : 54.215.234.106
+   port : 11883
+ - name : E
+   ip : 54.215.234.106
+   port : 11884
+ - name : F
+   ip : 54.215.197.242
+   port : 11885
+ - name : G
+   ip : 54.215.197.242
+   port : 11886
+# - name : logger
+#   ip : 127.0.0.1
+#   port : 14882
+
+clock :
+ - type : vector
+
+sendRules :
+ - action : delay
+   src : A
+   dest : B
+   kind : release
+ - action : drop
+   src : Ad
+   dest : Cd
+   kind : drop
+
+receiveRules :
+ - action : drop
+   src : Ad
+   dest : Bd
+   kind : drop2
+
+groups :
+ - name : GroupA
+   members :
+   - A
+   - B
+   - C
+ - name : GroupB
+   members :
+   - B
+   - D
+   - F
+ - name : GroupC
+   members :
+   - C
+   - E
+   - F
+ - name : GroupD
+   members :
+   - A
+   - D
+   - E
+ - name : GroupE
+   members :
+   - B
+   - E
+   - G
+ - name : GroupF
+   members :
+   - A
+   - F
+   - G
+ - name : GroupG
+   members :
+   - C
+   - D
+   - G
